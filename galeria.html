@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería — Lanita</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* pequeño ajuste local: si quieres lo movemos a styles.css */
+        body { background-color: #FFF9F5; color: #4A3428; font-family: 'Georgia', serif; }
+    </style>
+</head>
+<body>
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Galería</h2>
+        <p class="section-subtitle">Algunas de nuestras creaciones favoritas</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="img/amarillo.png" alt="Imagen 1"></div>
+            <div class="gallery-item"><img src="img/burbuja.png" alt="Imagen 2"></div>
+            <div class="gallery-item"><img src="img/chilin.png" alt="Imagen 3"></div>
+            <div class="gallery-item"><img src="img/chimue.png" alt="Imagen 4"></div>
+            <div class="gallery-item"><img src="img/cortinas.png" alt="Imagen 5"></div>
+            <div class="gallery-item"><img src="img/musculosa.png" alt="Imagen 6"></div>
+            <div class="gallery-item"><img src="img/naranja.png" alt="Imagen 7"></div>
+            <div class="gallery-item"><img src="img/pingui.png" alt="Imagen 8"></div>
+            <div class="gallery-item"><img src="img/toallon azul.png" alt="Imagen 9"></div>
+        </div>
+    </section>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox" id="lightbox" tabindex="-1" aria-hidden="true">
+        <div class="close-x" id="lightboxClose" aria-label="Cerrar">✕</div>
+        <img src="" alt="" id="lightboxImg">
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Lightbox simple para ampliar la imagen al click
+        (function(){
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeBtn = document.getElementById('lightboxClose');
+
+            function open(src, alt){
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || '';
+                lightbox.classList.add('visible');
+                lightbox.setAttribute('aria-hidden','false');
+                // focus para accesibilidad
+                lightbox.focus();
+            }
+
+            function close(){
+                lightbox.classList.remove('visible');
+                lightbox.setAttribute('aria-hidden','true');
+                lightboxImg.src = '';
+            }
+
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', (e) => {
+                    open(e.currentTarget.src, e.currentTarget.alt);
+                });
+            });
+
+            // cerrar al clicar overlay o botón
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === closeBtn) close();
+            });
+
+            // cerrar con ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('visible')) close();
+            });
+        })();
+    </script>
+</body>
+</html>

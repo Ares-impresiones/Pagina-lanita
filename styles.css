@@ -981,3 +981,42 @@ section {
         display: none;
     }
 }
+
+/* Imagenes dentro de gallery-item: asegurar que entren y corten correctamente */
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+/* Lightbox simple para ampliar imagen */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,10,0.7);
+    z-index: 9999;
+    padding: 2rem;
+}
+.lightbox.visible { display: flex; }
+.lightbox img {
+    max-width: 96%;
+    max-height: 92%;
+    border-radius: 10px;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.6);
+    border: 6px solid rgba(255,249,245,0.92);
+    background: #fff;
+}
+.lightbox .close-x {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+}
