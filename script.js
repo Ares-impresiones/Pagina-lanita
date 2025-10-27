@@ -124,3 +124,25 @@ sectionTitles.forEach(title => {
     title.style.opacity = '0';
     titleObserver.observe(title);
 });
+
+// Toggle para menú hamburguesa en móvil
+(function(){
+    const navToggle = document.querySelector('.nav-toggle');
+    const navbar = document.querySelector('.navbar');
+    if (!navToggle || !navbar) return;
+
+    navToggle.addEventListener('click', () => {
+        const open = navbar.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Cerrar menú al clicar un enlace
+    document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+            if (navbar.classList.contains('nav-open')) {
+                navbar.classList.remove('nav-open');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+})();

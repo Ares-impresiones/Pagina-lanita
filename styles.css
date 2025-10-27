@@ -114,8 +114,48 @@ body {
 @media (max-width: 480px) {
     .nav-inner { flex-direction: column; gap: 0.4rem; padding: 0.4rem 1rem; align-items: stretch; }
     .nav-brand { font-size: 1.4rem; text-align: center; }
-    .nav-links { flex-direction: column; gap: 0.4rem; padding: 0; margin-left: 0; align-items: center; }
-    .nav-links a { font-size: 0.95rem; padding: 0.4rem 0.6rem; }
+    /* ocultar links por defecto y mostrarlos en overlay cuando se abra */
+    .nav-links { display: none; position: absolute; top: calc(var(--navbar-height)); right: 8px; left: 8px; background: rgba(255,249,245,0.98); border-radius: 10px; box-shadow: 0 8px 30px rgba(58,40,32,0.06); flex-direction: column; gap: 0.4rem; padding: 0.6rem; margin: 0; align-items: center; }
+    .nav-links a { font-size: 0.95rem; padding: 0.6rem 0.8rem; display: block; text-align: center; }
+    /* botón toggle (hamburguesa) visible en móvil */
+    .nav-toggle { display: inline-flex; align-items: center; justify-content: center; background: transparent; border: none; padding: 0.25rem 0.5rem; cursor: pointer; color: rgba(74,52,40,0.9); }
+    /* cuando la navbar tenga la clase nav-open mostramos el menú */
+    .navbar.nav-open .nav-links { display: flex; }
+    /* esconder el brand pequeño si se quiere cuando se abre el menu */
+    .navbar.nav-open .nav-brand { opacity: 0.9; }
+}
+
+/* Hamburger icon (oculto en escritorio) */
+.nav-toggle { display: none; }
+.hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 26px;
+    height: 18px;
+    justify-content: center;
+}
+.hamburger span {
+    display: block;
+    height: 2px;
+    background: rgba(74,52,40,0.95);
+    border-radius: 2px;
+    transition: transform 260ms ease, opacity 180ms ease;
+}
+
+/* transform hamburger to X when nav-open */
+.navbar.nav-open .hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.navbar.nav-open .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+.navbar.nav-open .hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 480px) {
+    .nav-toggle { display: inline-flex; }
 }
 
 /* Hero Section */
